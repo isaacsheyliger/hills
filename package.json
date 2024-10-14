@@ -1,5 +1,5 @@
 {
-  "name": "node-three",
+  "name": "temp",
   "version": "0.0.0",
   "private": true,
   "scripts": {
@@ -7,12 +7,12 @@
     "dev": "DEBUG=myapp:* npm start"
   },
   "dependencies": {
+    "@netlify/functions": "^2.8.2",
+    "@types/express": "^5.0.0",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
-    "ejs": "^3.1.10",
-    "express": "^4.19.2",
-    "http-errors": "~1.6.3",
+    "express": "^4.21.1",
     "morgan": "~1.9.1",
-    "three": "^0.167.1"
+    "serverless-http": "^3.2.0"
   }
 }

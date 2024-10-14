@@ -1,25 +1,30 @@
-// replace import with necessary assets
-// import {  } from "./assets/___";
 import * as THREE from 'three';
+import { createScene } from './setup.js';
 
-const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+// #region SCENE
+const sc = createScene(true);
 
-const renderer = new THREE.WebGLRenderer();
-renderer.setSize(window.innerWidth, window.innerHeight);
-document.body.appendChild(renderer.domElement);
+sc.camera.position.set(0, 0, 5000);
 
-const cube = new THREE.Mesh(
-    new THREE.BoxGeometry(),
-    new THREE.MeshBasicMaterial({ color: 0xffffff })
-);
-scene.add(cube);
+sc.controls.enableDamping = true;
+sc.controls.enableKeys = false;
+sc.controls.enablePan = false;
+// #endregion
 
-camera.position.z = 5;
+// #region VIZ
 
-function animate() {  
-    cube.rotation.x += 0.01;
-    cube.rotation.y += 0.01;
-    renderer.render(scene, camera);
+// #endregion
+
+// #region ANIMATE
+let clock = new THREE.Clock();
+
+function animate () {
+    uniforms.u_time.value = clock.getElapsedTime();
+    sc.renderer.render(sc.scene, sc.camera);
 }
-renderer.setAnimationLoop(animate);
+sc.renderer.setAnimationLoop(animate);
+// #endregion
+
+// #region HELPER FUNCTIONS
+
+// #endregion
