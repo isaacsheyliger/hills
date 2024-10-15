@@ -3,14 +3,8 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
 export function createScene(orbitControls = false) {
     // Set up scene
-    let canvasWidth 
-    
-    if (window.innerWidth > 1000) {
-        canvasWidth = window.innerWidth / 1.25;
-    } else {
-        canvasWidth = window.innerWidth - 50;
-    }
-    const canvasHeight = canvasWidth;
+    const canvasWidth = window.innerWidth;
+    const canvasHeight = window.innerHeight;
     const d = 20
     const aspect = canvasWidth / canvasHeight;
 

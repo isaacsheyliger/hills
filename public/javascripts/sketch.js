@@ -19,7 +19,6 @@ sc.controls.enablePan = false;
 let clock = new THREE.Clock();
 
 function animate () {
-    uniforms.u_time.value = clock.getElapsedTime();
     sc.renderer.render(sc.scene, sc.camera);
 }
 sc.renderer.setAnimationLoop(animate);

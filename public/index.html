@@ -11,7 +11,7 @@
             }
         }
         </script>
-        <script type="module" src="/javascripts/viz.js"></script>
+        <script type="module" src="/javascripts/sketch.js"></script>
     </head>
 
     <body>
@@ -20,9 +20,23 @@
         layout: 
           canvas - full screen, z-index -1
           top right - theme selector 
-          bottom center - controls popup - closes on any control button press
           top left - icons - click into for easter eggs, not sure what yet 
         -->
+        <div id="selectors">
+          <div id="theme-selector-dropdown">
+              <label for="theme-selector-content" id="theme-selector-button">Theme</label>
+              <select name="theme-selector-content" id="theme-selector-content">
+                  <option value="blk">Blk</option>
+                  <option value="green-hills">Green Hills</option>
+              </select>
+          </div>
+          <section id="theme-selector-mobile">
+              <span class="switch">
+                <input id="switch-rounded" type="checkbox" />
+                <label for="switch-rounded"></label>
+              </span>
+          </section>
+        </div>
     </body>
 
 </html>
