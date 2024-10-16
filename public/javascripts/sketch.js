@@ -24,8 +24,12 @@ sc.controls.enablePan = false;
  * @param {number} height - the maximum height of the terrain
  */
 function create3DTerrain(width, depth, spacingX, spacingZ, height) {
-    // create individual vertices
     var geometry = new THREE.BufferGeometry();
+    /* PRE THREE.JS R125 LOGIC
+    // these steps are unnecessary with BufferGeometry, 
+    // but the logic is worth understanding for general 3D rendering applications
+    
+    // specify vertex positions
     for (var z = 0; z < depth; z++) {
         for (var x = 0; x < width; x++) {
             var vertex = new THREE.Vector3(
@@ -37,9 +41,23 @@ function create3DTerrain(width, depth, spacingX, spacingZ, height) {
         }
     }
 
-    // create faces
+    // create faces 
+    for (var z = 0; z < depth - 1; z++) {
+        for (var x = 0; x < width - 1; x++) {
+            var a = x + z * width;
+            var b = (x + 1) + (z * width);
+            var c = x + ((z + 1) * width);
+            var d = (x + 1) + ((z + 1) * width);
 
+            var face1 = new THREE.Face3(b, a, c);
+            var face2 = new THREE.Face3(c, d, b);
+            geometry.faces.push(face1);
+            geometry.faces.push(face2);
+        }
+    }
     // create mesh and add to scene
+    
+    */
 }
 
 // #endregion
