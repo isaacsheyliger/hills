@@ -25,6 +25,20 @@ sc.controls.enablePan = false;
  */
 function create3DTerrain(width, depth, spacingX, spacingZ, height) {
     var geometry = new THREE.BufferGeometry();
+
+    // specify vertex positions
+    const vArr = [];
+    for (var z = 0; z < depth; z++) {
+        for (var x = 0; x < width; x++) {
+            vArr.push(
+                x * spacingX,
+                Math.random() * height,
+                z * spacingZ
+            );
+        }
+    }
+
+    geometry.setAttribute('position', new THREE.Float32BufferAttribute(vArr, 3));
     /* PRE THREE.JS R125 LOGIC
     // these steps are unnecessary with BufferGeometry, 
     // but the logic is worth understanding for general 3D rendering applications
@@ -44,6 +58,10 @@ function create3DTerrain(width, depth, spacingX, spacingZ, height) {
     // create faces 
     for (var z = 0; z < depth - 1; z++) {
         for (var x = 0; x < width - 1; x++) {
+            // we need to point to the position in the array
+            // a - - b
+            // | / |
+            // c - - d
             var a = x + z * width;
             var b = (x + 1) + (z * width);
             var c = x + ((z + 1) * width);
