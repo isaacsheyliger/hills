@@ -1,22 +1,40 @@
 import * as THREE from 'three';
 import { createScene } from './setup.js';
 
-// #region SCENE
+const sc = init();
 
-const sc = createScene(true);
+sc.renderer.setAnimationLoop(animate(sc));
 
-sc.camera.position.set(0, 0, 5000);
+// #region HELPER FUNCTIONS
 
-sc.controls.enableDamping = true;
-sc.controls.enableKeys = false;
-sc.controls.enablePan = false;
+function init() {
+    const sc = createScene(true);
+    sc.camera.position.set(0, 0, 5000);
 
-// #endregion
+    sc.controls.enableDamping = true;
+    sc.controls.enableKeys = false;
+    sc.controls.enablePan = false;
+    return sc;
+}
 
-// #region VIZ
+function animate(sc) {
+    sc.renderer.render(sc.scene, sc.camera);
+}
 
 /**
- * Creates a 3D terrain mesh
+ * getHighPoint - returns the highest point in a geometry
+ * @param {object} geometry - the geometry to analyze
+ * @returns {number} - the highest point in the geometry
+ */
+function getHighPoint(geometry) {
+    // get the highest point in the geometry
+    let highPoint = 0;
+    console.log(geometry.vertices);
+    return highPoint;
+}
+
+/**
+ * create3DTerrain - Creates a 3D terrain mesh object
  * @param {number} width - the width of the terrain to generate
  * @param {number} depth - the depth of the terrain to generate 
  * @param {number} spacingX - how many rooms there will be between the individual vertices on the x-axis
@@ -27,7 +45,7 @@ function create3DTerrain(width, depth, spacingX, spacingZ, height) {
     var geometry = new THREE.BufferGeometry();
 
     // specify vertex positions
-    const vArr = [];
+    const vArr = new Float32Array([]);;
     for (var z = 0; z < depth; z++) {
         for (var x = 0; x < width; x++) {
             vArr.push(
@@ -39,6 +57,11 @@ function create3DTerrain(width, depth, spacingX, spacingZ, height) {
     }
 
     geometry.setAttribute('position', new THREE.Float32BufferAttribute(vArr, 3));
+
+    // color the the faces based on the height of the vertices
+    const colors = new Float32Array([]);
+
+
     /* PRE THREE.JS R125 LOGIC
     // these steps are unnecessary with BufferGeometry, 
     // but the logic is worth understanding for general 3D rendering applications
@@ -78,19 +101,15 @@ function create3DTerrain(width, depth, spacingX, spacingZ, height) {
     */
 }
 
-// #endregion
+/**
+ * Creates a 3D terrain mesh with a color gradient
+ * @param {object} geometry - the buffer geometry for the terrain mesh
+ */
+function colorMesh(geometry) {
 
-// #region ANIMATE
-
-function animate () {
-    sc.renderer.render(sc.scene, sc.camera);
+    var numFaces = geometry.getAttribute('position').count / 3,
+    colors = [],
+    object = new THREE.Mesh(geometry, new THREE.MeshBasicMaterial({ vertexColors: true }));
 }
-sc.renderer.setAnimationLoop(animate);
-
-// #endregion
-
-// #region HELPER FUNCTIONS
-
-
 
 // #endregion
